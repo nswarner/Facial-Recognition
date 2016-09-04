@@ -1,0 +1,34 @@
+Setting up Windows 10 for Python, OpenCV, pip(comes bundled), numpy, and matplotlib(not yet used)
+
+On Windows 10
+	- Download and install Python 2.7*
+		- https://www.python.org/downloads/
+	- IF you do not have pip**
+		- Download ez_setup.py
+		- Download get-pip.py
+		- [cli]python <path_to>ez_setup.py
+		- [cli]python <path_to>get-pip.py
+	- [cli]pip install numpy
+	- [cli]pip install matplotlib
+	- Download and install PIL
+		- http://www.pythonware.com/products/pil/
+	- Download cmake installer (exe), install
+	- Download the openCV compressed executable (exe, version 2.4.x, not 3.x)
+		- http://sourceforge.net/projects/opencvlibrary/files/opencv-win/2.4.6/OpenCV-2.4.6.0.exe/download
+	- Extract openCV
+	- Go to <path_to>/opencv/build/python/2.7/(x64|x86)/
+		- Copy cv2.pyd to <path_to>/Python27/lib/site-packages
+		- Mine was x86 and would not work with x64 (despite 64bit system)
+	- Open Python IDLE and type in:
+		- [idle]import cv2
+		- [idle]print cv2.__version__
+
+* IF you have Python 3.x installed: Settings --> System --> About --> System Info --> Advanced System Settings --> Environment Variables --> System variables --> [Select Path, click Edit] --> Delete or Move Down priority of Python3x and Python3x/Scripts below Python27 and Python27/Scripts --> Click OK
+** Python 3.4.x and Python 2.7.x come with pip; to verify if you have pip, open a cmd window and type pip --version
+
+Style Guide:
+	[cli] means open a cmd window and execute this command on the command line
+	(blah1|blah2) means choose either blah1 or blah2 based on your system preferences
+	<path_to> means figure out where you have these items installed
+	[idle] means open IDLE, the Python generic IDE, and type these commands
+		Alternatively, open a cmd window, type python, then try the commands
