@@ -7,13 +7,6 @@ from PIL import Image
     Contact: bikz.05@gmail.com
     URL: http://hanzratech.in/2015/02/03/face-recognition-using-opencv.html
 
-    Todo:
-     1. Download a personal training dataset from FB (~15-20 images per person)
-        - Setup as training_set folder
-     2. Reorganize the code to read the new training set (i.e. no .sad, .glasses, etc)
-     3. Incorporate RPi's camera module to constantly scan for faces
-     4. If recognized face, load personalized document (browser?)
-
     Revised Todo:
      1. Download a personal training dataset from FB
         - Set up as training_set folder

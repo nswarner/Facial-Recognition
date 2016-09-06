@@ -67,11 +67,12 @@ class FaceRecognizer:
                 # Let's verify that each photo is in the training set
                 cv2.imshow("Adding faces to training set...", image[y: y + h, x: x + w])
                 cv2.waitKey(100)
-                var = raw_input("Who is this? ")
-                if not (var == "nobody" or var == ""):
+                var = raw_input("Who is this? ").lower()
+                # Verify it's someone
+                if not var == "":
                     images.append(image[y: y + h, x: x + w])
                     labels.append(nbr)
-                    print("Image added.")
+                    print("Image added [" + var + "]")
         # return the images list and labels list
         return images, labels
 
