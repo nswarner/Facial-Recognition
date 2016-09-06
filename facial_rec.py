@@ -27,7 +27,7 @@ load_previous = "./last_recognizer.xml"
 create_new = "./training_set"
 #create_new = "./yalefaces"
 recog = face_recognizer.FaceRecognizer(load_previous, create_new)
-recog.save_recognizer("./last_recognizer.xml")
+#recog.save_recognizer("./last_recognizer.xml")
 
 path = "./testing_set"
 
@@ -43,10 +43,14 @@ for image_path in image_paths:
     for (x, y, w, h) in faces:
         #nbr_predicted, conf = recognizer.predict(predict_image[y: y + h, x: x + w])
         nbr_predicted, conf = recog.predict2(predict_image[y: y + h, x: x + w])
-        nbr_actual = int(os.path.split(image_path)[1].split(".")[0].replace("subject", ""))
+        #nbr_actual = int(os.path.split(image_path)[1].split(".")[0].replace("subject", ""))
+        # Let's fix this instead of leaving it broken...
+        nbr_actual = 1
         if nbr_actual == nbr_predicted:
             print "{} is Correctly Recognized with confidence {}".format(nbr_actual, conf)
+            cv2.waitKey(1000)
         else:
             print "{} is Incorrect Recognized as {}".format(nbr_actual, nbr_predicted)
+            cv2.waitKey(1000)
         cv2.imshow("Recognizing Face", predict_image[y: y + h, x: x + w])
         cv2.waitKey(200)

@@ -17,14 +17,15 @@ class FaceRecognizer:
             self.train_from_images(images, labels)
 
     def load_recognizer(self, r_path):
-        recognizer = cv2.createLBPHFaceRecognizer()
-        recognizer.load(r_path)
+        self.recognizer = cv2.createLBPHFaceRecognizer()
+        self.recognizer.load(r_path)
 
     def new_recognizer(self, path):
         # For face recognition we will the the LBPH Face Recognizer
         self.recognizer = cv2.createLBPHFaceRecognizer()
         images, labels = self.prepare_images_and_labels(path)
         self.train_from_images(images, labels)
+        self.save_recognizer("./last_recognizer.xml")
 
     def old(self, path):
         if os.path.isfile(path):
@@ -60,23 +61,26 @@ class FaceRecognizer:
             # Get the label of the image
             #nbr = int(os.path.split(image_path)[1].split(".")[0].replace("subject", ""))
             #nbr = os.path.split(image_path)[1].split(".")[0]
-            if (image_path.startswith("g")):
-                nbr = "Grant"
+            if (image_path.startswith("./training_set\\g")):
+                nbr = 1
             else:
-                nbr = "Ashley"
+                nbr = 2
             # Detect the face in the image
             faces = face_cascade.detectMultiScale(image)
             # If face is detected, append the face to images and the label to labels
             for (x, y, w, h) in faces:
                 # Let's verify that each photo is in the training set
                 cv2.imshow("Adding faces to training set...", image[y: y + h, x: x + w])
-                cv2.waitKey(50)
-                var = raw_input("Type 'n' if this isn't a face, [enter] otherwise: ").lower()
+                cv2.waitKey(200)
+                var = raw_input("[" + image_path + "] 'n' if this isn't a face, [enter] otherwise: ").lower()
                 # Verify it's someone
                 if var == "":
                     images.append(image[y: y + h, x: x + w])
                     labels.append(nbr)
-                    print("Image added, recognized [" + nbr + "]")
+                    if (nbr == 1):
+                        print("Image added, recognized [Grant]")
+                    else:
+                        print("Image added, recognized [Ashley]")
         # return the images list and labels list
         return images, labels
 
