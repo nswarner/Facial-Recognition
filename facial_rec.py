@@ -24,15 +24,16 @@ import face_recognizer
 # Test if we already have a recognizer set
 
 load_previous = "./last_recognizer.xml"
-#create_new = "./training_set"
-create_new = "./yalefaces"
+create_new = "./training_set"
+#create_new = "./yalefaces"
 recog = face_recognizer.FaceRecognizer(load_previous, create_new)
 recog.save_recognizer("./last_recognizer.xml")
 
-path = create_new
+path = "./testing_set"
 
 # Append the images with the extension .sad into image_paths
-image_paths = [os.path.join(path, f) for f in os.listdir(path) if f.endswith('.sad')]
+#image_paths = [os.path.join(path, f) for f in os.listdir(path) if f.endswith('.sad')]
+image_paths = [os.path.join(path, f) for f in os.listdir(path)]
 for image_path in image_paths:
     predict_image_pil = Image.open(image_path).convert('L')
     predict_image = np.array(predict_image_pil, 'uint8')

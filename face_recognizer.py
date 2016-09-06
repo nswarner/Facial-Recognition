@@ -58,21 +58,25 @@ class FaceRecognizer:
             # Convert the image format into numpy array
             image = np.array(image_pil, 'uint8')
             # Get the label of the image
-            nbr = int(os.path.split(image_path)[1].split(".")[0].replace("subject", ""))
-            #nbr = int(os.path.split(image_path)[1].split(".")[0])
+            #nbr = int(os.path.split(image_path)[1].split(".")[0].replace("subject", ""))
+            #nbr = os.path.split(image_path)[1].split(".")[0]
+            if (image_path.startswith("g")):
+                nbr = "Grant"
+            else:
+                nbr = "Ashley"
             # Detect the face in the image
             faces = face_cascade.detectMultiScale(image)
             # If face is detected, append the face to images and the label to labels
             for (x, y, w, h) in faces:
                 # Let's verify that each photo is in the training set
                 cv2.imshow("Adding faces to training set...", image[y: y + h, x: x + w])
-                cv2.waitKey(100)
-                var = raw_input("Who is this? ").lower()
+                cv2.waitKey(50)
+                var = raw_input("Type 'n' if this isn't a face, [enter] otherwise: ").lower()
                 # Verify it's someone
-                if not var == "":
+                if var == "":
                     images.append(image[y: y + h, x: x + w])
                     labels.append(nbr)
-                    print("Image added [" + var + "]")
+                    print("Image added, recognized [" + nbr + "]")
         # return the images list and labels list
         return images, labels
 
